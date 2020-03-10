@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles.b61e60ae.css">
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.10.0/firebase-firestore.js"></script>
+    <title>Covid-19</title>
+<script src="/styles.b61e60ae.js"></script></head>
+
+<body>
+    <h1>Covid-19 Storm</h1>
+    <div class="content">
+        <form action="" id="add-covid-nations"></form>
+        <ul id="nation-list"></ul>
+    </div>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+
+    <script>// Your web app's Firebase configuration
+var firebaseConfig = {
+  apiKey: "AIzaSyDvK3cVq5cSQ4uw_xmyJrf4H7vDM2ZVeuY",
+  authDomain: "covid-19-storm.firebaseapp.com",
+  databaseURL: "https://covid-19-storm.firebaseio.com",
+  projectId: "covid-19-storm",
+  storageBucket: "covid-19-storm.appspot.com",
+  messagingSenderId: "103505621172",
+  appId: "1:103505621172:web:17e842495e0db2b412a7e1"
+}; // Initialize Firebase
+
+firebase.initializeApp(firebaseConfig); // Create reference to Db
+
+var db = firebase.firestore();
+db.settings({
+  timestampsInSnapshots: true
+});</script>
+    <script src="/app.c328ef1a.js"></script>
+</body>
+
+</html>

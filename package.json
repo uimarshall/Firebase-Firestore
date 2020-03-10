@@ -1,0 +1,26 @@
+{
+    "name": "firebase-firestore",
+    "version": "1.0.0",
+    "description": "This repo is for how to set up firebase including CRUD operations and making queries and lots more....",
+    "main": "app.js",
+    "dependencies": {
+        "parcel-bundler": "^1.12.4"
+    },
+    "devDependencies": {},
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "dev": "parcel index.html",
+        "build": "parcel build index.html"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/uimarshall/Firebase-Firestore.git"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/uimarshall/Firebase-Firestore/issues"
+    },
+    "homepage": "https://github.com/uimarshall/Firebase-Firestore#readme"
+}
