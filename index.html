@@ -8,13 +8,33 @@
     <!-- The core Firebase JS SDK is always required and must be listed first -->
     <script src="https://www.gstatic.com/firebasejs/7.10.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.10.0/firebase-firestore.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>
     <title>Covid-19</title>
 </head>
 
 <body>
-    <h1>Covid-19 Storm</h1>
+    <h1>Covid19Ware</h1>
+    <!-- Text Animations -->
+    <h1 class="ml8">
+        <span class="letters-container">
+				<span class="letters letters-left">Hi</span>
+        <span class="letters bang">!</span>
+        </span>
+        <span class="circle circle-white"></span>
+        <span class="circle circle-dark"></span>
+        <span class="circle circle-container"><span class="circle circle-dark-dashed"></span
+			></span>
+    </h1>
+
+    <!-- Main Content -->
     <div class="content">
-        <form action="" id="add-covid-nations"></form>
+        <form action="" id="add-covid-nations">
+            <input type="text" name="name" placeholder="Add Country name" />
+            <input type="text" name="city" placeholder="Add City name" />
+            <input type="number" name="cases" placeholder="Reported cases" />
+            <input type="number" name="death" placeholder="Reported deaths" />
+            <button type="submit">Submit</button>
+        </form>
         <ul id="nation-list"></ul>
     </div>
 

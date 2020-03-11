@@ -124,7 +124,8 @@ parcelRequire = (function (modules, cache, entry, globalName) {
 -'snapshot' is the representation of diff kinds of data inside the collection
 -snapshot.docs; // will return all documents in the coll
 */
-var nationList = document.querySelector("#nation-list"); // Create Function/element and render nation
+var nationList = document.querySelector("#nation-list");
+var form = document.querySelector('#add-covid-nations'); // Create Function/element and render nation
 
 function renderNation(doc) {
   var li = document.createElement("li");
@@ -142,7 +143,8 @@ function renderNation(doc) {
   li.appendChild(cases);
   li.appendChild(deaths);
   nationList.appendChild(li);
-}
+} // Getting Data
+
 
 db.collection("countries").get().then(function (snapshot) {
   snapshot.docs.forEach(function (doc) {
@@ -150,6 +152,67 @@ db.collection("countries").get().then(function (snapshot) {
 
     renderNation(doc);
   });
+}); // Post/Add/Saving Data to Db
+
+form.addEventListener('submit', function (e) {
+  e.preventDefault();
+  db.collection('countries').add({
+    name: form.name.value,
+    city: form.city.value,
+    cases: form.cases.value,
+    deaths: form.death.value
+  });
+  form.name.value = '';
+  form.city.value = '';
+  form.cases.value = '';
+  form.death.value = '';
+}); // JAVASCRIPT ANIMATIONS
+
+anime.timeline({
+  loop: true
+}).add({
+  targets: '.ml8 .circle-white',
+  scale: [0, 3],
+  opacity: [1, 0],
+  easing: "easeInOutExpo",
+  rotateZ: 360,
+  duration: 1100
+}).add({
+  targets: '.ml8 .circle-container',
+  scale: [0, 1],
+  duration: 1100,
+  easing: "easeInOutExpo",
+  offset: '-=1000'
+}).add({
+  targets: '.ml8 .circle-dark',
+  scale: [0, 1],
+  duration: 1100,
+  easing: "easeOutExpo",
+  offset: '-=600'
+}).add({
+  targets: '.ml8 .letters-left',
+  scale: [0, 1],
+  duration: 1200,
+  offset: '-=550'
+}).add({
+  targets: '.ml8 .bang',
+  scale: [0, 1],
+  rotateZ: [45, 15],
+  duration: 1200,
+  offset: '-=1000'
+}).add({
+  targets: '.ml8',
+  opacity: 0,
+  duration: 1000,
+  easing: "easeOutExpo",
+  delay: 1400
+});
+anime({
+  targets: '.ml8 .circle-dark-dashed',
+  rotateZ: 360,
+  duration: 8000,
+  easing: "linear",
+  loop: true
 });
 },{}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
@@ -179,7 +242,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49702" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61349" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
