@@ -6,8 +6,8 @@
 */
 
 const nationList = document.querySelector("#nation-list");
-const form = document.querySelector('#add-covid-nations')
-    // Create Function/element and render nation
+const form = document.querySelector("#add-covid-nations");
+// Create Function/element and render nation
 function renderNation(doc) {
     let li = document.createElement("li");
     let name = document.createElement("span");
@@ -15,18 +15,28 @@ function renderNation(doc) {
     let city = document.createElement("span");
     let cases = document.createElement("span");
     let deaths = document.createElement("span");
+    let cross = document.createElement("div");
     li.setAttribute("data-id", doc.id);
     name.textContent = doc.data().name;
     city.textContent = "Cities Affected: " + doc.data().city[0];
     cases.textContent = "Cases: " + doc.data().cases;
     deaths.textContent = "Deaths: " + doc.data().deaths;
+    cross.textContent = "x";
     li.appendChild(name);
     li.appendChild(city);
     li.appendChild(cases);
     li.appendChild(deaths);
+    li.appendChild(cross);
     nationList.appendChild(li);
+    // Deleting Data
+    cross.addEventListener("click", e => {
+        e.stopPropagation();
+        let id = e.target.parentElement.getAttribute("data-id");
+        db.collection("countries")
+            .doc(id)
+            .delete();
+    });
 }
-
 
 // Getting Data
 db.collection("countries")
@@ -38,85 +48,73 @@ db.collection("countries")
         });
     });
 
-
 // Post/Add/Saving Data to Db
 
-form.addEventListener('submit', (e) => {
-    e.preventDefault()
-    db.collection('countries').add({
+form.addEventListener("submit", e => {
+    e.preventDefault();
+    db.collection("countries").add({
         name: form.name.value,
         city: form.city.value,
         cases: form.cases.value,
         deaths: form.death.value
-    })
-    form.name.value = ''
-    form.city.value = ''
-    form.cases.value = ''
-    form.death.value = ''
-})
-
-
+    });
+    form.name.value = "";
+    form.city.value = "";
+    form.cases.value = "";
+    form.death.value = "";
+});
 
 // JAVASCRIPT ANIMATIONS
-anime.timeline({
+anime
+    .timeline({
         loop: true
-    }
-
-).add({
-        targets: '.ml8 .circle-white',
+    })
+    .add({
+        targets: ".ml8 .circle-white",
         scale: [0, 3],
         opacity: [1, 0],
         easing: "easeInOutExpo",
         rotateZ: 360,
         duration: 1100
-    }
-
-).add({
-        targets: '.ml8 .circle-container',
+    })
+    .add({
+        targets: ".ml8 .circle-container",
         scale: [0, 1],
         duration: 1100,
         easing: "easeInOutExpo",
-        offset: '-=1000'
-    }
-
-).add({
-        targets: '.ml8 .circle-dark',
+        offset: "-=1000"
+    })
+    .add({
+        targets: ".ml8 .circle-dark",
         scale: [0, 1],
         duration: 1100,
         easing: "easeOutExpo",
-        offset: '-=600'
-    }
-
-).add({
-        targets: '.ml8 .letters-left',
+        offset: "-=600"
+    })
+    .add({
+        targets: ".ml8 .letters-left",
         scale: [0, 1],
         duration: 1200,
-        offset: '-=550'
-    }
-
-).add({
-        targets: '.ml8 .bang',
+        offset: "-=550"
+    })
+    .add({
+        targets: ".ml8 .bang",
         scale: [0, 1],
         rotateZ: [45, 15],
         duration: 1200,
-        offset: '-=1000'
-    }
-
-).add({
-        targets: '.ml8',
+        offset: "-=1000"
+    })
+    .add({
+        targets: ".ml8",
         opacity: 0,
         duration: 1000,
         easing: "easeOutExpo",
         delay: 1400
-    }
-
-);
+    });
 anime({
-        targets: '.ml8 .circle-dark-dashed',
-        rotateZ: 360,
-        duration: 8000,
-        easing: "linear",
-        loop: true
-    }
-
-);
+    targets: ".ml8 .circle-dark-dashed",
+    rotateZ: 360,
+    duration: 8000,
+    easing: "linear",
+    loop: true
+});
