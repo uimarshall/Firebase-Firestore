@@ -153,9 +153,28 @@ function renderNation(doc) {
     db.collection("countries").doc(id).delete();
   });
 } // Getting Data
+// db.collection("countries")
+//     .get()
+//     .then(snapshot => {
+//         snapshot.docs.forEach(doc => {
+//             console.log(doc.data()); //will return each data in the docs
+//             renderNation(doc);
+//         });
+//     });
+// Getting Data By Order
+// db.collection("countries")
+//     .orderBy("name")
+//     .get()
+//     .then(snapshot => {
+//         snapshot.docs.forEach(doc => {
+//             console.log(doc.data()); //will return each data in the docs
+//             renderNation(doc);
+//         });
+//     });
+// Getting Data Thru Query
 
 
-db.collection("countries").get().then(function (snapshot) {
+db.collection("countries").where("city", "==", "wuhan").get().then(function (snapshot) {
   snapshot.docs.forEach(function (doc) {
     console.log(doc.data()); //will return each data in the docs
 
@@ -175,6 +194,19 @@ form.addEventListener("submit", function (e) {
   form.city.value = "";
   form.cases.value = "";
   form.death.value = "";
+}); // Real-Time Data/Update
+// onSnapshot means listen to changes in Db
+
+db.collection("countries").orderBy("name").onSnapshot(function (snapshot) {
+  var changes = snapshot.docChanges();
+  changes.forEach(function (change) {
+    if (change.type == "added") {
+      renderNation(change.doc);
+    } else if (change.type == "removed") {
+      var li = nationList.querySelector("[data-id" + change.doc.id + "]");
+      nationList.replaceChild(li);
+    }
+  });
 }); // JAVASCRIPT ANIMATIONS
 
 anime.timeline({
@@ -251,7 +283,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60535" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50645" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

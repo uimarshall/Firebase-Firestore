@@ -39,7 +39,27 @@ function renderNation(doc) {
 }
 
 // Getting Data
+// db.collection("countries")
+//     .get()
+//     .then(snapshot => {
+//         snapshot.docs.forEach(doc => {
+//             console.log(doc.data()); //will return each data in the docs
+//             renderNation(doc);
+//         });
+//     });
+// Getting Data By Order
+// db.collection("countries")
+//     .orderBy("name")
+//     .get()
+//     .then(snapshot => {
+//         snapshot.docs.forEach(doc => {
+//             console.log(doc.data()); //will return each data in the docs
+//             renderNation(doc);
+//         });
+//     });
+// Getting Data Thru Query
 db.collection("countries")
+    .where("city", "==", "wuhan")
     .get()
     .then(snapshot => {
         snapshot.docs.forEach(doc => {
@@ -63,6 +83,22 @@ form.addEventListener("submit", e => {
     form.cases.value = "";
     form.death.value = "";
 });
+
+// Real-Time Data/Update
+// onSnapshot means listen to changes in Db
+db.collection("countries")
+    .orderBy("name")
+    .onSnapshot(snapshot => {
+        let changes = snapshot.docChanges();
+        changes.forEach(change => {
+            if (change.type == "added") {
+                renderNation(change.doc);
+            } else if (change.type == "removed") {
+                let li = nationList.querySelector("[data-id" + change.doc.id + "]");
+                nationList.replaceChild(li);
+            }
+        });
+    });
 
 // JAVASCRIPT ANIMATIONS
 anime
